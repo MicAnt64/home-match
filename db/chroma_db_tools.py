@@ -1,12 +1,13 @@
 """Tools for creating and using a ChromaDB Vector Database."""
 
-import chromadb
-import chromadb.utils.embedding_functions as embedding_functions
 import os
 import random
 import string
-from dotenv import load_dotenv
 from typing import List
+
+import chromadb
+import chromadb.utils.embedding_functions as embedding_functions
+from dotenv import load_dotenv
 
 load_dotenv()
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
