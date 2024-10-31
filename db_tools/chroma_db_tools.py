@@ -6,7 +6,9 @@ import string
 from typing import List
 
 import chromadb
-import chromadb.utils.embedding_functions as embedding_functions
+from chromadb.utils.embedding_functions import OpenAIEmbeddingFunction
+
+from chromadb.errors import ChromaError
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -14,7 +16,7 @@ OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
 class ChromaDatabaseCollection:
     """
-    Utility class for interactive with a Chroma Database.
+    Utility class for interacting with a Chroma Database.
     """
     def __init__(self, path_to_db:str,
                  open_ai_embedding_model_name:str = "text-embedding-3-small",
@@ -29,14 +31,14 @@ class ChromaDatabaseCollection:
         self.collection = None
         self.path_to_db = path_to_db
         self.distance_func = distance_func
-        self.embedding_func = embedding_functions.OpenAIEmbeddingFunction(
+        self.embedding_func = OpenAIEmbeddingFunction(
             api_key=OPENAI_API_KEY,
             model_name=open_ai_embedding_model_name
         )
 
     def connect_to_client(self):
         """
-        Create a persistent client to Chroma DB
+        Create a persistent client to Chroma DB.
         """
         try:
             self.client = chromadb.PersistentClient(path=self.path_to_db)
@@ -52,12 +54,12 @@ class ChromaDatabaseCollection:
         """
         if self.client:
             try:
-                self.collection = self.client.create_collection(
+                self.collection = self.client.get_or_create_collection(
                     name=collection_name,
                     embedding_function=self.embedding_func,
                     metadata={f"hnsw:space": distance_fn}
                 )
-            except Exception as e:
+            except ChromaError as e:
                 print(e)
         else:
             raise ValueError("A connection to Chroma client must be made.")
@@ -100,20 +102,23 @@ class ChromaDatabaseCollection:
 
     def peek(self):
         """
-        Peeks into collection and returns the 1st 10 items in the collection.
+        Peeks into collection and prints the 1st 10 items in the collection.
         """
         self._check_if_connected_to_collection()
 
         try:
             obj = self.collection.peek()
+
+            print("Printing a list of the first 10 items in the collection")
+            for idx, item in enumerate(obj['documents']):
+                print(f"Item {idx + 1}:")
+                print(item)
+                print("----------------------")
+
         except Exception as e:
             print(e)
 
-        print("Printing a list of the first 10 items in the collection")
-        for idx, item in enumerate(obj['documents']):
-            print(f"Item {idx + 1}:")
-            print(item)
-            print("----------------------")
+
 
     def count(self):
         """
@@ -129,7 +134,7 @@ class ChromaDatabaseCollection:
 
     @staticmethod
     def _generate_random_ids(num_ids:int = 1, id_length:int = 20) -> List[str]:
-        """Generates a specified number of random IDs, each of a given length. ID's are randomly generated set of
+        """Generates a specified number of random IDs, each of a given length. IDs are randomly generated set of
         ASCII digits and letters.
         :param num_ids: Number of ID's that need to be generated.
         :param id_length: Number of characters in ID
@@ -141,7 +146,7 @@ class ChromaDatabaseCollection:
 
     def add_entries(self, docs: List[str]):
         """
-        Adds entries/documents to collection. ID's are randomly generated for each document that is inserted to the
+        Adds entries/documents to collection. IDs are randomly generated for each document that is inserted to the
         collection.
         :param docs: Text of documents in text form. Can be 1 or many.
         """
@@ -173,7 +178,7 @@ class ChromaDatabaseCollection:
                 query_texts=[query_text], # Chroma will embed this for you
                 n_results=num_results, # how many results to return
             )
-            print(type(results["documents"]))
-            return results["documents"]
+
+            return results["documents"][0]
         except Exception as e:
             print(e)
