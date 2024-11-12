@@ -186,7 +186,7 @@ This is the path where the Chroma DB is located for the Home Match application. 
 generated using <i>GenerateRealEstateListings.py</i>.
 
 To see an example of 10 listings that are in the database, please refer to the file located at: 
-<i>db/example_listings.txt</i>. You can use the peek method in the <i>ChromaDatabaseCollection</i> class under the
+<i>Listings.txt</i>. You can use the peek method in the <i>ChromaDatabaseCollection</i> class under the
 <i>chroma_db_tools.py</i> file.
 
 - listings/GenerateRealEstateListings.py
@@ -205,7 +205,7 @@ personalize the response, then it queries the Chroma DB for the top 3 results th
 looking for. Finally, the Real Estate AI recommender picks one of the three real estate listings, and suggests the 
 listing in a conversation-like format while personalizing it based on the user's questions.
 
-- db/ten_listings_from_db.txt
+- Listings.txt
 
 Contains code on how to peek at the database and get 10 listings. Also contains 10 listings obtained from the database.
 
