@@ -1,0 +1,112 @@
+# This was obtained from running the following...
+
+from dotenv import load_dotenv
+from db_tools.chroma_db_tools import ChromaDatabaseCollection
+import os
+
+load_dotenv()
+
+PATH_TO_CHROMA_DB = os.getenv("PATH_TO_CHROMA_DB")
+
+# Connect to DB
+chroma_db_tools = ChromaDatabaseCollection(f"{PATH_TO_CHROMA_DB}/real_estate_listings")
+chroma_db_tools.connect_to_client()
+chroma_db_tools.get_collection("home_match")
+chroma_db_tools.count()
+chroma_db_tools.peek()
+
+===============================================================================================
+
+Number of items in collection: 20
+
+Printing a list of the first 10 items in the collection
+Item 1:
+Neighborhood: Willow Creek
+Price: $450,000
+Bedrooms: 4
+Bathrooms: 3
+House Size: 2,500 sqft
+Description: Discover the elegance of this spacious 4-bedroom, 3-bathroom home in Willow Creek. Featuring a modern kitchen with granite countertops and stainless steel appliances, this home offers an open floor plan perfect for entertaining. The master suite includes a walk-in closet and a luxurious en-suite bathroom. Outside, enjoy a large deck overlooking a beautifully landscaped backyard.
+Neighborhood Description: Willow Creek is a serene suburban neighborhood known for its family-friendly atmosphere and excellent schools. With numerous parks and recreational facilities, it's ideal for active families. Enjoy easy access to shopping centers and restaurants in this vibrant community.
+----------------------
+Item 2:
+Neighborhood: Maplewood Estates
+Price: $625,000
+Bedrooms: 5
+Bathrooms: 4
+House Size: 3,200 sqft
+Description: Situated in the prestigious Maplewood Estates, this expansive 5-bedroom, 4-bathroom home is a perfect blend of luxury and comfort. The gourmet kitchen features a large island and custom cabinetry. The spacious living room with a fireplace opens to a private patio. The master suite offers a spa-like bathroom and private balcony.
+Neighborhood Description: Maplewood Estates is a sought-after neighborhood with tree-lined streets and luxurious homes. Residents enjoy access to private parks, tennis courts, and a community clubhouse. The area is known for its tranquil atmosphere and excellent schools.
+----------------------
+Item 3:
+Neighborhood: Sunnyvale
+Price: $375,000
+Bedrooms: 3
+Bathrooms: 2
+House Size: 1,800 sqft
+Description: This charming 3-bedroom, 2-bathroom home in Sunnyvale offers a bright and airy living space with vaulted ceilings and large windows. The updated kitchen features quartz countertops and a breakfast nook. The backyard is perfect for entertaining, with a patio and lush greenery.
+Neighborhood Description: Sunnyvale is a vibrant neighborhood with a strong sense of community. Known for its sunny weather and parks, it's a favorite among young families and professionals. Enjoy local cafes, farmers markets, and community events throughout the year.
+----------------------
+Item 4:
+Neighborhood: River Heights
+Price: $520,000
+Bedrooms: 4
+Bathrooms: 3
+House Size: 2,700 sqft
+Description: Welcome home to this stunning 4-bedroom, 3-bathroom property in River Heights. This home features a grand foyer, hardwood floors, and a cozy fireplace in the living room. The chef's kitchen includes high-end appliances and a butler's pantry. Enjoy the spacious backyard with a pergola and garden area.
+Neighborhood Description: River Heights is a picturesque neighborhood along the river, known for its scenic beauty and outdoor activities. Residents enjoy hiking trails, fishing spots, and community events. With excellent schools and amenities, it's a perfect place for families.
+----------------------
+Item 5:
+Neighborhood: Oak Valley
+Price: $310,000
+Bedrooms: 3
+Bathrooms: 2
+House Size: 1,600 sqft
+Description: Nestled in Oak Valley, this cozy 3-bedroom, 2-bathroom home offers a warm and inviting atmosphere. The living room features a wood-burning fireplace and large windows. The kitchen is updated with stainless steel appliances and granite countertops. The backyard is a private retreat with mature trees.
+Neighborhood Description: Oak Valley is a peaceful neighborhood with a small-town feel. Known for its friendly residents and community events, it's a great place for families and retirees. Enjoy local parks, walking trails, and charming shops in the area.
+----------------------
+Item 6:
+Neighborhood: Cedar Ridge
+Price: $475,000
+Bedrooms: 4
+Bathrooms: 3
+House Size: 2,400 sqft
+Description: Experience the charm of this beautifully maintained 4-bedroom, 3-bathroom home in Cedar Ridge. Featuring an open floor plan and hardwood floors, this home is perfect for entertaining. The kitchen boasts modern appliances and a breakfast bar. Relax in the landscaped backyard with a covered patio.
+Neighborhood Description: Cedar Ridge is a family-friendly neighborhood with excellent schools and amenities. Known for its community spirit, it offers plenty of activities for residents, including sports leagues and festivals. Enjoy the scenic parks and nature trails nearby.
+----------------------
+Item 7:
+Neighborhood: Lakeview
+Price: $690,000
+Bedrooms: 5
+Bathrooms: 4
+House Size: 3,500 sqft
+Description: This luxurious 5-bedroom, 4-bathroom home in Lakeview offers stunning lake views and modern amenities. The open-concept living space features a gourmet kitchen with a large island and a spacious living room with a fireplace. The master suite includes a private balcony and a spa-like bathroom.
+Neighborhood Description: Lakeview is a prestigious lakeside community known for its beautiful homes and serene environment. Residents enjoy boating, fishing, and waterfront parks. The neighborhood offers top-rated schools and a variety of dining and shopping options.
+----------------------
+Item 8:
+Neighborhood: Birchwood
+Price: $540,000
+Bedrooms: 4
+Bathrooms: 3
+House Size: 2,800 sqft
+Description: Discover this elegant 4-bedroom, 3-bathroom home in Birchwood, featuring a grand entryway and high ceilings. The gourmet kitchen includes granite countertops and a double oven. The living room opens to a large deck, perfect for outdoor gatherings. The master suite offers a walk-in closet and luxurious bathroom.
+Neighborhood Description: Birchwood is a vibrant community known for its excellent schools and recreational facilities. Residents enjoy access to parks, a community pool, and walking trails. The neighborhood is conveniently located near shopping centers and restaurants.
+----------------------
+Item 9:
+Neighborhood: Aspen Woods
+Price: $485,000
+Bedrooms: 4
+Bathrooms: 3
+House Size: 2,600 sqft
+Description: Welcome to Aspen Woods, where this beautiful 4-bedroom, 3-bathroom home awaits. Featuring a modern design with an open floor plan, the home includes a stylish kitchen with stainless steel appliances and a large island. The backyard boasts a covered patio and a play area.
+Neighborhood Description: Aspen Woods is a family-friendly neighborhood known for its excellent schools and community events. Residents enjoy parks, walking trails, and a local community center. The area offers a mix of suburban charm and convenient city access.
+----------------------
+Item 10:
+Neighborhood: Pine Hill
+Price: $360,000
+Bedrooms: 3
+Bathrooms: 2
+House Size: 1,750 sqft
+Description: This delightful 3-bedroom, 2-bathroom home in Pine Hill offers a comfortable living space with modern updates. The kitchen features quartz countertops and a breakfast bar. The living room is bright and airy, with access to a large backyard perfect for kids and pets.
+Neighborhood Description: Pine Hill is a close-knit community with a small-town feel. Known for its excellent schools and parks, it's a great place for families. The neighborhood hosts regular community events and has several local shops and cafes.
+----------------------
