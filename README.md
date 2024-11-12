@@ -167,9 +167,79 @@ While this home may not fulfill every aspect of your dream, it embodies a lifest
 ### Example 3
 
 ##### <u>Q & A to understand what the user is looking for</u>
+AI: What neighborhood(s) do you have in mind?
+Human: I don't know
+
+AI: What is your price range?
+Human: 300,000 - 400,000
+
+AI: How many bedrooms are you looking for?
+Human: 2
+
+AI: How many bathrooms are you looking for?
+Human: 2
+
+AI: How about the house size (in square feet)?
+Human: 2000
+
+AI: What kind of home are you looking for, what amenities?
+Human: Hard wood floors, high ceilings, a porch
+
+AI: What is your ideal neighborhood, what are you looking for?
+Human: Close to a community pool, in a safe neighbourhood.
+
+Human: Now, I will provide you with some questions and answers that will help you guide you in understanding who I am as a person, what I like, and maybe how I talk (but keep it professional - basically build a persona on how the AI personalized realtor assistant should talk to and describe the real estate listing for a home the user is lookingfor.
+AI: To personalize your response, what is your favorite music band?
+Human: Taylor Swift
+
+AI: What is your favorite movie?
+Human: The Notebook
+
+AI: What is the best decade in your lifetime?
+Human: 2010s
+
 ##### <u>Top 3 Real estate listings based on what the user is looking for</u>
+Listing Number: 1
+
+Neighborhood: Pine Hill  
+Price: $360,000  
+Bedrooms: 3  
+Bathrooms: 2  
+House Size: 1,750 sqft  
+Description: This delightful 3-bedroom, 2-bathroom home in Pine Hill offers a comfortable living space with modern updates. The kitchen features quartz countertops and a breakfast bar. The living room is bright and airy, with access to a large backyard perfect for kids and pets.  
+Neighborhood Description: Pine Hill is a close-knit community with a small-town feel. Known for its excellent schools and parks, it's a great place for families. The neighborhood hosts regular community events and has several local shops and cafes.
+
+Listing Number: 2
+
+Neighborhood: Parkside  
+Price: $375,000  
+Bedrooms: 3  
+Bathrooms: 2  
+House Size: 1,850 sqft  
+Description: This delightful 3-bedroom, 2-bathroom home in Parkside offers a comfortable living space with modern updates. The kitchen features quartz countertops and a breakfast nook. The living room is bright and airy, with access to a large backyard perfect for kids and pets.  
+Neighborhood Description: Parkside is a vibrant neighborhood with a strong sense of community. Known for its parks and recreational facilities, it's a favorite among young families and professionals. Enjoy local cafes, farmers markets, and community events throughout the year.
+
+Listing Number: 3
+
+Neighborhood: River Heights  
+Price: $520,000  
+Bedrooms: 4  
+Bathrooms: 3  
+House Size: 2,700 sqft  
+Description: Welcome home to this stunning 4-bedroom, 3-bathroom property in River Heights. This home features a grand foyer, hardwood floors, and a cozy fireplace in the living room. The chef's kitchen includes high-end appliances and a butler's pantry. Enjoy the spacious backyard with a pergola and garden area.  
+Neighborhood Description: River Heights is a picturesque neighborhood along the river, known for its scenic beauty and outdoor activities. Residents enjoy hiking trails, fishing spots, and community events. With excellent schools and amenities, it's a perfect place for families.
+
 ##### <u>Recommended Real Estate Listing by AI</u>
 
+Based on your preferences and personality, I have a charming home that might just be your perfect match. Nestled in the vibrant neighborhood of Parkside, this delightful 3-bedroom, 2-bathroom home is listed at $375,000. While it offers a bit more space than you initially mentioned, the extra room could be a great bonus for hosting friends or creating a cozy reading nook inspired by your love for "The Notebook."
+
+The home spans 1,850 square feet and features modern updates that blend seamlessly with its inviting atmosphere. The kitchen is equipped with quartz countertops and a breakfast nook, perfect for enjoying a morning coffee while listening to your favorite Taylor Swift tracks. The living room is bright and airy, providing a welcoming space to relax and unwind.
+
+Parkside is a neighborhood that resonates with a strong sense of community, much like the close-knit connections in your favorite decade, the 2010s. It's known for its parks and recreational facilities, making it ideal for leisurely strolls or weekend picnics. The area also boasts local cafes, farmers markets, and community events throughout the year, ensuring there's always something to look forward to.
+
+While this home doesn't have a porch, its large backyard offers ample space for outdoor gatherings or simply enjoying a quiet evening under the stars. The neighborhood's safe and friendly environment aligns with your desire for a secure place to call home, and its proximity to community amenities adds to its appeal.
+
+I hope this listing captures the essence of what you're looking for in your future home.
 
 ## Software Design
 This repository contains the following:
