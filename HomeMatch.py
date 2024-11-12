@@ -15,7 +15,7 @@ from langchain_openai import OpenAIEmbeddings
 load_dotenv()
 
 model_name = "gpt-4o"
-temperature = 0.0
+temperature = 0.1
 
 llm = ChatOpenAI(model_name=model_name, temperature=temperature, max_tokens=1000)
 
@@ -27,33 +27,33 @@ personal_real_estate_questions = [
     "How many bathrooms are you looking for?",
     "How about the house size (in square feet)?",
     "What kind of home are you looking for, what amenities?",
-    "What is your ideal neighborhood, what are you looking for?",
-    "To personalize your response, what is your favorite music band?",
-    "What is your favorite movie?"
+    "What is your ideal neighborhood, what are you looking for?"
 ]
 
 personal_real_estate_answers = [
-    "Some nice sounding name",
-    "500,000 - 550,000",
-    "4",
-    "3",
-    "5000",
-    "A cozy home, with a backyard, a pool, a fireplace, open space kitchen, quite neighborhood. Single story.",
-    "Has a lot of green, vegetation, proximity to grocery stores, quiet neighborhood, good school district."
+    "I don't know",
+    "300,000 - 400,000",
+    "2",
+    "2",
+    "2000",
+    "Hard wood floors, high ceilings, a porch",
+    "Close to a community pool, in a safe neighbourhood."
 ]
+
 
 # Generate a set of questions and answers to get some understanding about the user
 preference_questions = [
     "To personalize your response, what is your favorite music band?",
-    "What is your favorite movie?"
+    "What is your favorite movie?",
     "What is the best decade in your lifetime?"
 ]
 
 preference_answers = [
-    "The Doors",
-    "The Godfather",
-    "1970s"
+    "Taylor Swift",
+    "The Notebook",
+    "2010s"
 ]
+
 
 
 # for q in personal_real_estate_questions:
@@ -69,7 +69,7 @@ preference_answers = [
 
 history = ChatMessageHistory()
 history.add_user_message(
-    f"You are Personalized Realtor assistant that will recommend Real Estate listing based on the users preference. "
+    f"You are a personalized Realtor assistant that will recommend Real Estate listings based on the user's preference."
     f"The following questions are asked by the AI assistant, to better understand what the user is looking for.")
 
 for q, a in zip(personal_real_estate_questions, personal_real_estate_answers):
@@ -77,8 +77,8 @@ for q, a in zip(personal_real_estate_questions, personal_real_estate_answers):
     history.add_user_message(a)
 
 history.add_user_message(
-    "Now, I will provide you some questions and answers that will help you guide you in understanding who I am as a "
-    "person, what I like, maybe how I talk (but keep it professional - basically build a persona on how the AI "
+    "Now, I will provide you with some questions and answers that will help you guide you in understanding who I am as "
+    "a person, what I like, and maybe how I talk (but keep it professional - basically build a persona on how the AI "
     "personalized realtor assistant should talk to and describe the real estate listing for a home the user is looking"
     "for."
 )
@@ -87,7 +87,7 @@ for q, a in zip(preference_questions, preference_answers):
     history.add_ai_message(q)
     history.add_user_message(a)
 
-# Retrieve closests real estate listings based on what user is looking for
+# Retrieve the closest real estate listings based on what the user is looking for
 PATH_TO_CHROMA_DB = os.getenv("PATH_TO_CHROMA_DB")
 
 embeddings = OpenAIEmbeddings(model="text-embedding-3-small")
@@ -121,11 +121,11 @@ summary_memory = ConversationSummaryMemory(
     llm=llm,
     memory_key="recommendation_summary",
     input_key="input",
-    buffer=f"The human answered provided what he is looking for in his future home. The human also provided some answers"
-           f" regarding their personality so the AI real estate agent can create a persona that can speak and describe "
-           f"the listing in a personalized manner. Also use the answers provided in what the human is looking for so you "
-           f"can understand the language the human uses when you build the persona. Always keep the language professional"
-           f" meaning, no toxicity, no foul language, nothing offensive.",
+    buffer=f"The human answered and provided what he is looking for in his future home. The human also provided some "
+           f"answers regarding their personality so the AI real estate agent can create a persona that can speak and "
+           f"describe the listing in a personalized manner. Also, use the answers provided in what the human is looking"
+           f" for so you can understand the language the human uses when you build the persona. Always keep the "
+           f"language professional meaning, no toxicity, no foul language, nothing offensive.",
     return_messages=True)
 
 class MementoBufferMemory(ConversationBufferMemory):
@@ -140,10 +140,10 @@ conversational_memory = MementoBufferMemory(
 )
 
 memory = CombinedMemory(memories=[conversational_memory, summary_memory])
-RECOMMENDER_TEMPLATE = """The following is a friendly conversation between a human and an AI Real Estate Agent Recommender.
-                        The AI follows human instructions and provides real estate listing for a human based listings provided 
-                        as context
-                        and human's persona derived from their answers to questions.
+RECOMMENDER_TEMPLATE = """The following is a friendly conversation between a human and an AI Real Estate Agent 
+                        Recommender. The AI follows human instructions and provides real estate listings for a human, 
+                        based listings provided as context and the human's persona derived from their answers to 
+                        questions.
 #
 # Summary of Recommendations:
 # {recommendation_summary}
@@ -165,14 +165,18 @@ real_estate_instructions = f"""
 === END OF REAL ESTATE LISTINGS ===
 =====================================
 AI will provide a highly personalized real estate listing based on what the human is looking for in the human provided
-answers to questions included with the context. And the Listings retrieved from the database which are the {num_listings}
-closest listing based of what the human may be looking for.
+answers to questions included with the context. The listings retrieved from the database are the {num_listings}
+closest listings based on what the human may be looking for.
 AI should be very sensible to human personal preferences captured in the answers to personal questions,
 and should not be influenced by anything else.
-AI will also build a persona for human based on human answers to questions, and use this persona to provide real estate listing.
-Keep the listings factual. Do not hallucinate.
+AI will also build a persona for the human based on the human's answers to questions, and use this persona to a provide
+real estate listings. Keep the listings factual. Do not hallucinate.
 OUTPUT FORMAT:
-FOLLOW THE INSTRUCTIONS STRICTLY, OTHERWISE HUMAN WILL NOT BE ABLE TO UNDERSTAND YOUR REVIEW.
+FOLLOW THE INSTRUCTIONS STRICTLY, OTHERWISE HUMAN WILL NOT BE ABLE TO UNDERSTAND YOUR REVIEW. OUTPUT THE LISTING AS A
+TEXT DESCRIPTION OF THE LISTING emphasizing aspects of the property that align with what the buyer is looking for. 
+Maintain Factual Integrity. Do not hallucinate. Ensure that the augmentation process enhances the appeal of the 
+listing without altering factual info. Propose the listing in text-like format as if it were a human describing the 
+property. Ensure you incorporate answers to personal questions to make the listing more personal. Just pick 1 listing.
 """
 
 # Get AI Recommendation
