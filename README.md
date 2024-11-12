@@ -205,9 +205,11 @@ personalize the response, then it queries the Chroma DB for the top 3 results th
 looking for. Finally, the Real Estate AI recommender picks one of the three real estate listings, and suggests the 
 listing in a conversation-like format while personalizing it based on the user's questions.
 
+- db/ten_listings_from_db.txt
 
-TTD
+Contains code on how to peek at the database and get 10 listings. Also contains 10 listings obtained from the database.
 
-2. Add examples in Readme 10min MON
-3. Add 10 listings 10 min MON
-4. Submit 15 min MON
+- .env
+
+You will need a .env file that contains and OPENAI_API_KEY, OPENAI_API_BASE, and you'll need to modify the 
+PATH_TO_CHROMA_DB.
